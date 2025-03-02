@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "786140899201",
+    "project_id": "apptruyen-670b1",
+    "storage_bucket": "apptruyen-670b1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786140899201:android:401ab278d2684f4dcaaa80",
+        "android_client_info": {
+          "package_name": "com.example.tangthucac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786140899201-1ckl6bdci36d5vgegqis9juts27i3s60.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tangthucac",
+            "certificate_hash": "f570737cce211acf1fa755ba96c81dceba031de4"
+          }
+        },
+        {
+          "client_id": "786140899201-hhqjofmbknkrlgd652adjvgl4rvrtsfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABFVHHR1nslypMoyDl1mHYtP8iTOWDJHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786140899201-bk315h2f3suv3thta5ovnhrgmb3o6o54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
