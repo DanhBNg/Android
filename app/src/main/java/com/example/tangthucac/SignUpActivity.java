@@ -15,9 +15,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         txtLogin.setOnClickListener(v -> {
-            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
         });
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent in = new Intent(SignUpActivity.this,MainActivity.class);
+                                    Intent in = new Intent(SignUpActivity.this, LoginActivity.class);
                                     in.putExtra("email",email);
                                     in.putExtra("password",password);
                                     startActivity(in);
