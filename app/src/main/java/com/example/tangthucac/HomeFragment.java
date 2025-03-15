@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    private static final String BASE_URL = "https://apptruyenfu-default-rtdb.asia-southeast1.firebasedatabase.app/";
+    private static final String BASE_URL = "https://apptruyen-670b1-default-rtdb.firebaseio.com/";
 
     private ViewPager2 viewPagerBanner;
     private BannerAdapter bannerAdapter;
