@@ -1,6 +1,8 @@
-package testapim;
+package com.example.tangthucac;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,18 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
 
         // Load ảnh từ URL với Glide
         Glide.with(context).load(story.getImage()).into(holder.imageStory);
+
+        holder.itemView.setOnClickListener(v -> {
+            Log.d("RecyclerView", "Clicked on: " + story.getTitle());
+            if (story != null) {
+                Intent intent = new Intent(context, StoryDetailActivity.class);
+                intent.putExtra("story", story);
+                context.startActivity(intent);
+            } else {
+                Log.e("RecyclerView", "Story is null!");
+            }
+        });
+
     }
 
     @Override

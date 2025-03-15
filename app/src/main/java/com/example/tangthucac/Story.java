@@ -1,8 +1,9 @@
-package testapim;
+package com.example.tangthucac;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Story {
+public class Story implements Serializable {
     private String title;
     private String author;
     private int views;
