@@ -20,6 +20,12 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
+        <activity android:name=".StoryDetailActivity"
+            android:exported="false" />
+            />
+        <activity android:name=".ChapterReaderActivity"
+            android:exported="false" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">

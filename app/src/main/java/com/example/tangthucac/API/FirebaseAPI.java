@@ -12,3 +12,4 @@ public interface FirebaseAPI {
     @GET("stories.json")
     Call<Map<String, Story>> getStories();
 }
+
