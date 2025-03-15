@@ -24,15 +24,20 @@
 
         <TextView
             android:id="@+id/textTitle"
-            android:layout_width="117dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:ellipsize="end"
             android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:maxLength="17"
+            android:maxLines="1"
             android:paddingTop="4dp"
             android:text="Tên truyện"
             android:textColor="#000"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:maxLength="13"/>
+            android:textStyle="bold" />
+
 
         <TextView
             android:id="@+id/textAuthor"
