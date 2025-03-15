@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tiêu đề chương -->
+    <TextView
+        android:id="@+id/chapterTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chapter Title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp" />
+
+    <!-- Nội dung chương, sử dụng ScrollView để cuộn nội dung -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/chapterContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chapter Content"
+            android:textSize="16sp" />
+    </ScrollView>
+
+    <!-- Nút chuyển chương -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chương trước" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chương sau"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+</LinearLayout>
