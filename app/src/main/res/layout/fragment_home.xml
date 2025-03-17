@@ -20,6 +20,24 @@
             android:padding="10dp">
 
             <!-- ViewPager2 cho banner quảng cáo -->
+
+            <LinearLayout
+                android:layout_width="393dp"
+                android:layout_height="61dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/editTextText3"
+                    android:layout_width="274dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Tìm kiếm"
+                    android:inputType="text"
+                    android:text="" />
+
+            </LinearLayout>
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerBanner"
                 android:layout_width="match_parent"

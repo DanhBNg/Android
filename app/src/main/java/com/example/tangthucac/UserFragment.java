@@ -8,16 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 public class UserFragment extends Fragment {
-    private Button btnLogout;
+    private Button btnLogout, btn_log, btn_sign;
+    private TextView txtUserId, txtUserEmail;
     private FirebaseAuth mAuth;
     private GoogleSignInClient ggS;
+    private DatabaseReference databaseReference;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,6 +33,41 @@ public class UserFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         btnLogout = view.findViewById(R.id.btn_Logout);
+        btn_log = view.findViewById(R.id.btn_log);
+        btn_sign = view.findViewById(R.id.btn_sign);
+        txtUserId = view.findViewById(R.id.txtUserId);
+        txtUserEmail = view.findViewById(R.id.txtUserEmail);
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            // Người dùng đã đăng nhập
+            txtUserEmail.setText("Email: " + currentUser.getEmail());
+
+            // Lấy tham chiếu Database
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+
+            // Kiểm tra nếu ID đã lưu trong database chưa
+            databaseReference.child("id").get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult().getValue() != null) {
+                    // Nếu đã có ID -> Hiển thị
+                    txtUserId.setText("ID: " + task.getResult().getValue().toString());
+                } else {
+                    // Nếu chưa có ID -> Tạo ID mới và lưu
+                    String newId = generateRandomId();
+                    databaseReference.child("id").setValue(newId);
+                    txtUserId.setText("ID: " + newId);
+                }
+            });
+
+            // Ẩn nút Login & Sign Up
+            btn_log.setVisibility(View.GONE);
+            btn_sign.setVisibility(View.GONE);
+        } else {
+            // Người dùng chưa đăng nhập, ẩn Logout
+            btnLogout.setVisibility(View.GONE);
+            txtUserId.setText("ID: ");
+            txtUserEmail.setText("Email: ");
+        }
 
         // Khởi tạo GoogleSignInClient để đăng xuất Google
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -32,6 +75,19 @@ public class UserFragment extends Fragment {
                 .requestEmail()
                 .build();
         ggS = GoogleSignIn.getClient(requireActivity(), gso);
+
+        btn_log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+        btn_sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity((new Intent(getActivity(), SignUpActivity.class)));
+            }
+        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,5 +109,15 @@ public class UserFragment extends Fragment {
             startActivity(intent);
             requireActivity().finish(); // Đóng Activity hiện tại
         });
+    }
+    private String generateRandomId() {
+        int length = 10; // Độ dài chuỗi
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder randomId = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            randomId.append(chars.charAt(random.nextInt(chars.length())));
+        }
+        return randomId.toString();
     }
 }
