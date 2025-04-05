@@ -14,24 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.tangthucac.API.FirebaseAPI;
-import com.example.tangthucac.BannerAdapter;
-import com.example.tangthucac.StoryAdapter;
-import com.example.tangthucac.Story;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
-
-    private static final String BASE_URL = "https://apptruyen-670b1-default-rtdb.firebaseio.com/";
 
     private ViewPager2 viewPagerBanner;
     private BannerAdapter bannerAdapter;
@@ -42,14 +34,19 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewStories;
     private StoryAdapter storyAdapter;
     private List<Story> storyList = new ArrayList<>();
-    private FirebaseAPI api;
+
+    // Thêm DatabaseReference
+    private DatabaseReference databaseReference;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Cấu hình ViewPager2 cho banner quảng cáo
+        // Khởi tạo Firebase DatabaseReference
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        // Cấu hình ViewPager2 cho banner quảng cáo (giữ nguyên)
         viewPagerBanner = view.findViewById(R.id.viewPagerBanner);
         bannerImages = new ArrayList<>();
         bannerImages.add(R.drawable.banner1);
@@ -59,7 +56,7 @@ public class HomeFragment extends Fragment {
         bannerAdapter = new BannerAdapter(bannerImages);
         viewPagerBanner.setAdapter(bannerAdapter);
 
-        // Tự động chạy banner
+        // Tự động chạy banner (giữ nguyên)
         bannerHandler = new Handler();
         bannerRunnable = () -> {
             int nextItem = viewPagerBanner.getCurrentItem() + 1;
@@ -78,32 +75,29 @@ public class HomeFragment extends Fragment {
         storyAdapter = new StoryAdapter(getContext(), storyList);
         recyclerViewStories.setAdapter(storyAdapter);
 
-        // Khởi tạo Retrofit để gọi API
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        api = retrofit.create(FirebaseAPI.class);
-        fetchStories();
+        // Thay thế Retrofit bằng Firebase Realtime Database
+        fetchStoriesFromFirebase();
 
         return view;
     }
 
-    private void fetchStories() {
-        api.getStories().enqueue(new Callback<Map<String, Story>>() {
+    private void fetchStoriesFromFirebase() {
+        databaseReference.child("stories").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onResponse(@NonNull Call<Map<String, Story>> call, @NonNull Response<Map<String, Story>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    storyList.clear();
-                    storyList.addAll(response.body().values());
-                    storyAdapter.notifyDataSetChanged();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                storyList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Story story = dataSnapshot.getValue(Story.class);
+                    if (story != null) {
+                        storyList.add(story);
+                    }
                 }
+                storyAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(@NonNull Call<Map<String, Story>> call, @NonNull Throwable t) {
-                Log.e("Firebase", "Lỗi: " + t.getMessage());
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Lỗi khi đọc dữ liệu: " + error.getMessage());
             }
         });
     }
