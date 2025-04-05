@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FFF8F0">
 
     <!-- Tiêu đề chương -->
     <TextView
@@ -14,20 +15,64 @@
         android:text="Chapter Title"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:paddingBottom="8dp" />
+        android:textColor="#333333"
+        android:paddingBottom="8dp"
+        android:gravity="center"/>
 
-    <!-- Nội dung chương, sử dụng ScrollView để cuộn nội dung -->
+    <!-- Nút điều khiển chính -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Đọc"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dừng"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/btnTTSSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tùy chỉnh"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#FF9800"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <!-- Nội dung chương -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:padding="12dp"
+        android:elevation="4dp">
 
         <TextView
             android:id="@+id/chapterContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Chapter Content"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="#333333"/>
     </ScrollView>
 
     <!-- Nút chuyển chương -->
@@ -35,20 +80,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="8dp">
 
         <Button
             android:id="@+id/btnPrev"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Chương trước" />
+            android:layout_weight="1"
+            android:text="Chương trước"
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Chương sau"
-            android:layout_marginStart="16dp" />
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
-
 </LinearLayout>
