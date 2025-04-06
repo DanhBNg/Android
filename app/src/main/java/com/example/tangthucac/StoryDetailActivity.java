@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +28,7 @@ public class StoryDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_detail);
 
-        // Ánh xạ các view từ layout activity_story_detail.xml
+        // Initialize views
         storyImage = findViewById(R.id.storyImage);
         storyTitle = findViewById(R.id.storyTitle);
         storyAuthor = findViewById(R.id.storyAuthor);
@@ -34,37 +36,71 @@ public class StoryDetailActivity extends AppCompatActivity {
         chapterRecyclerView = findViewById(R.id.chapterRecyclerView);
         readButton = findViewById(R.id.readButton);
 
-        // Nhận dữ liệu từ Intent
-        story = (Story) getIntent().getSerializableExtra("story");
+        // Setup RecyclerView with empty adapter first to avoid "No adapter attached" warning
+        chapterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        chapterRecyclerView.setAdapter(new ChapterAdapter(this, new ArrayList<>(), null));
 
-        if (story != null) {
-            storyTitle.setText(story.getTitle());
-            storyAuthor.setText("Tác giả: " + story.getAuthor());
-            storyViews.setText("Lượt xem: " + story.getViews());
-            Glide.with(this).load(story.getImage()).into(storyImage);
+        try {
+            story = (Story) getIntent().getSerializableExtra("story");
 
-            // Chuyển đổi map chapters thành List
-            Map<String, Chapter> chaptersMap = story.getChapters();
-            chapterList = new ArrayList<>(chaptersMap.values());
+            if (story != null) {
+                storyTitle.setText(story.getTitle());
+                storyAuthor.setText("Tác giả: " + story.getAuthor());
+                storyViews.setText("Lượt xem: " + story.getViews());
+                Glide.with(this).load(story.getImage()).into(storyImage);
 
-            // Sự kiện khi nhấn nút "Đọc truyện" -> chuyển đến chương đầu tiên
-            readButton.setOnClickListener(v -> {
-                Intent intent = new Intent(StoryDetailActivity.this, ChapterReaderActivity.class);
-                intent.putExtra("story", story);
-                intent.putExtra("chapterIndex", 0); // Chuyển đến chương đầu tiên
-                startActivity(intent);
-            });
+                // Get and sort chapters
+                chapterList = getSortedChapters(story.getChapters());
 
-            // Thiết lập RecyclerView cho danh sách chương
-            ChapterAdapter adapter = new ChapterAdapter(this, chapterList, position -> {
-                // Khi bấm vào chương, chuyển sang ChapterReaderActivity với index của chương
-                Intent intent = new Intent(StoryDetailActivity.this, ChapterReaderActivity.class);
-                intent.putExtra("story", story);
-                intent.putExtra("chapterIndex", position);
-                startActivity(intent);
-            });
-            chapterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            chapterRecyclerView.setAdapter(adapter);
+                // Setup adapter with sorted chapters
+                ChapterAdapter adapter = new ChapterAdapter(this, chapterList, position -> {
+                    Intent intent = new Intent(StoryDetailActivity.this, ChapterReaderActivity.class);
+                    intent.putExtra("story", story);
+                    intent.putExtra("chapterIndex", position);
+                    startActivity(intent);
+                });
+                chapterRecyclerView.setAdapter(adapter);
+
+                // Read button click
+                readButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(StoryDetailActivity.this, ChapterReaderActivity.class);
+                    intent.putExtra("story", story);
+                    intent.putExtra("chapterIndex", 0);
+                    startActivity(intent);
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            finish(); // Close activity if there's an error
         }
+    }
+
+    private List<Chapter> getSortedChapters(Map<String, Chapter> chaptersMap) {
+        List<Chapter> chapters = new ArrayList<>(chaptersMap.values());
+
+        Collections.sort(chapters, new Comparator<Chapter>() {
+            @Override
+            public int compare(Chapter c1, Chapter c2) {
+                try {
+                    // Extract number from keys like "chapter1", "chapter2", etc.
+                    String key1 = getKeyForChapter(chaptersMap, c1).replace("chapter", "");
+                    String key2 = getKeyForChapter(chaptersMap, c2).replace("chapter", "");
+                    return Integer.compare(Integer.parseInt(key1), Integer.parseInt(key2));
+                } catch (NumberFormatException e) {
+                    return 0; // If parsing fails, maintain original order
+                }
+            }
+        });
+
+        return chapters;
+    }
+
+    private String getKeyForChapter(Map<String, Chapter> map, Chapter chapter) {
+        for (Map.Entry<String, Chapter> entry : map.entrySet()) {
+            if (entry.getValue().equals(chapter)) {
+                return entry.getKey();
+            }
+        }
+        return "0";
     }
 }

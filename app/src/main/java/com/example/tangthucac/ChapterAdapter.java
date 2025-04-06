@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder> {
@@ -20,7 +22,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     public ChapterAdapter(Context context, List<Chapter> chapterList, OnItemClickListener listener) {
         this.context = context;
-        this.chapterList = chapterList;
+        this.chapterList = chapterList != null ? chapterList : new ArrayList<>();
         this.listener = listener;
     }
 
@@ -34,8 +36,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     @Override
     public void onBindViewHolder(@NonNull ChapterViewHolder holder, int position) {
         Chapter chapter = chapterList.get(position);
-        // Hiển thị "Chương {số thứ tự}: {title}"
         holder.chapterTitleTextView.setText("Chương " + (position + 1) + ": " + chapter.getTitle());
+
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(position);
@@ -50,6 +52,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     public static class ChapterViewHolder extends RecyclerView.ViewHolder {
         TextView chapterTitleTextView;
+
         public ChapterViewHolder(@NonNull View itemView) {
             super(itemView);
             chapterTitleTextView = itemView.findViewById(R.id.chapterTitleTextView);
