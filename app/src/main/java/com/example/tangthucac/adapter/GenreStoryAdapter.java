@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tangthucac.R;
+import com.example.tangthucac.model.Story;
+import com.example.tangthucac.activity.StoryDetailActivity;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.tangthucac.R;
+import com.example.tangthucac.adapter.BannerAdapter;
+import com.example.tangthucac.adapter.StoryAdapter;
+import com.example.tangthucac.model.Story;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

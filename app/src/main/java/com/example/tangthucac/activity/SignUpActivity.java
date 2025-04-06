@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.activity;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
@@ -16,6 +16,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tangthucac.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

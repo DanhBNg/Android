@@ -1,7 +1,7 @@
 
 package com.example.tangthucac.API;
 
-import com.example.tangthucac.Story;
+import com.example.tangthucac.model.Story;
 
 import java.util.Map;
 

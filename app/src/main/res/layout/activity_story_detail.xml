@@ -33,11 +33,18 @@
         android:textSize="16sp"/>
 
     <Button
+        android:id="@+id/btn_save_story"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu truyện"
+        android:layout_marginTop="20dp"/>
+
+    <Button
         android:id="@+id/readButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Đọc truyện"
-        android:layout_marginTop="20dp"/>
+        />
 
     <!-- RecyclerView hiển thị danh sách chương -->
     <androidx.recyclerview.widget.RecyclerView

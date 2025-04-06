@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.activity;
 
 import android.app.Dialog;
 import android.graphics.Typeface;
@@ -13,6 +13,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tangthucac.R;
+import com.example.tangthucac.model.Chapter;
+import com.example.tangthucac.model.Story;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

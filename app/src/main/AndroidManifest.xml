@@ -17,10 +17,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".GenreStoriesActivity"
+            android:name=".activity.GenreStoriesActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,19 +32,19 @@
             android:name=".TTSControlDialog"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".StoryDetailActivity"
+            android:name=".activity.StoryDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ChapterReaderActivity"
+            android:name=".activity.ChapterReaderActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false"> <!-- Thay đổi theme nếu cần -->
 
         </activity>

@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.activity;
 
 // SplashActivity.java
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tangthucac.R;
 
 public class SplashActivity extends AppCompatActivity {
 

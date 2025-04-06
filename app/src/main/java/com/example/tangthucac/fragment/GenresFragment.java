@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tangthucac.R;
+import com.example.tangthucac.adapter.GenreAdapter;
+
 import java.util.Arrays;
 import java.util.List;
 

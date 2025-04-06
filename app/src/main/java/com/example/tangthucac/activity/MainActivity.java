@@ -1,9 +1,12 @@
-package com.example.tangthucac;
+package com.example.tangthucac.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.tangthucac.R;
+import com.example.tangthucac.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

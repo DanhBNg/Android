@@ -1,17 +1,35 @@
-package com.example.tangthucac;
+package com.example.tangthucac.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.tangthucac.R;
+import com.example.tangthucac.SharedViewModel;
+import com.example.tangthucac.adapter.ChapterAdapter;
+import com.example.tangthucac.model.Chapter;
+import com.example.tangthucac.model.Story;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +37,10 @@ public class StoryDetailActivity extends AppCompatActivity {
     private ImageView storyImage;
     private TextView storyTitle, storyAuthor, storyViews;
     private RecyclerView chapterRecyclerView;
-    private Button readButton;
+    private Button readButton, saveButton;
     private Story story;
     private List<Chapter> chapterList;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +54,8 @@ public class StoryDetailActivity extends AppCompatActivity {
         storyViews = findViewById(R.id.storyViews);
         chapterRecyclerView = findViewById(R.id.chapterRecyclerView);
         readButton = findViewById(R.id.readButton);
+        saveButton = findViewById(R.id.btn_save_story);
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
 
         // Setup RecyclerView with empty adapter first to avoid "No adapter attached" warning
         chapterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,6 +89,7 @@ public class StoryDetailActivity extends AppCompatActivity {
                     intent.putExtra("chapterIndex", 0);
                     startActivity(intent);
                 });
+                saveButton.setOnClickListener(v -> saveStoryToLibrary());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,5 +124,41 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         }
         return "0";
+    }
+    private void saveStoryToLibrary() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (userId == null || story == null) {
+            Toast.makeText(this, "Không thể lưu truyện", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users")
+                .child(userId)
+                .child("Library")
+                .child(story.getTitle());
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Toast.makeText(StoryDetailActivity.this, "Truyện đã được lưu trước đó!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Map<String, Object> savedStory = new HashMap<>();
+                    savedStory.put("title", story.getTitle());
+                    savedStory.put("author", story.getAuthor());
+                    savedStory.put("image", story.getImage());
+
+                    ref.setValue(savedStory)
+                            .addOnSuccessListener(unused -> Toast.makeText(StoryDetailActivity.this, "Đã lưu vào thư viện", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e -> Toast.makeText(StoryDetailActivity.this, "Lỗi khi lưu: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            //sharedViewModel.requestRefresh();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(StoryDetailActivity.this, "Lỗi kết nối: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
