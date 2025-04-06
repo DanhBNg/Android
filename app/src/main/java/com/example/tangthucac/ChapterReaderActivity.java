@@ -1,11 +1,15 @@
 package com.example.tangthucac;
 
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +30,8 @@ public class ChapterReaderActivity extends AppCompatActivity implements TextToSp
     private boolean isPlaying = false;
     private float currentSpeed = 1.0f;
     private float currentPitch = 1.0f;
+    private float currentFontSize = 18f; // Giá trị mặc định cho cỡ chữ
+    private Typeface currentTypeface = Typeface.DEFAULT; // Phông chữ mặc định
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,11 +111,26 @@ public class ChapterReaderActivity extends AppCompatActivity implements TextToSp
 
         SeekBar speedSeekBar = dialog.findViewById(R.id.seekBarSpeed);
         SeekBar pitchSeekBar = dialog.findViewById(R.id.seekBarPitch);
+        SeekBar fontSizeSeekBar = dialog.findViewById(R.id.seekBarFontSize);
+        Spinner spinnerFont = dialog.findViewById(R.id.spinnerFont);
         Button btnClose = dialog.findViewById(R.id.btnClose);
 
         // Thiết lập giá trị hiện tại
         speedSeekBar.setProgress((int)((currentSpeed - 0.5f) * 100));
         pitchSeekBar.setProgress((int)((currentPitch - 0.5f) * 100));
+        fontSizeSeekBar.setProgress((int)currentFontSize - 10); // Giả sử cỡ chữ từ 10-40
+
+        // Thiết lập Spinner cho phông chữ
+        String[] fontOptions = {"Mặc định", "Serif", "Sans Serif", "Monospace"};
+        ArrayAdapter<String> fontAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, fontOptions);
+        fontAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFont.setAdapter(fontAdapter);
+
+        // Đặt lựa chọn phông chữ hiện tại
+        if (currentTypeface == Typeface.DEFAULT) spinnerFont.setSelection(0);
+        else if (currentTypeface == Typeface.SERIF) spinnerFont.setSelection(1);
+        else if (currentTypeface == Typeface.SANS_SERIF) spinnerFont.setSelection(2);
+        else if (currentTypeface == Typeface.MONOSPACE) spinnerFont.setSelection(3);
 
         // Xử lý thay đổi tốc độ
         speedSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -135,6 +156,40 @@ public class ChapterReaderActivity extends AppCompatActivity implements TextToSp
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        // Xử lý thay đổi cỡ chữ
+        fontSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                currentFontSize = progress + 10; // Cỡ chữ từ 10sp đến 40sp
+                chapterContent.setTextSize(currentFontSize);
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        // Xử lý thay đổi phông chữ
+        spinnerFont.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        currentTypeface = Typeface.DEFAULT;
+                        break;
+                    case 1:
+                        currentTypeface = Typeface.SERIF;
+                        break;
+                    case 2:
+                        currentTypeface = Typeface.SANS_SERIF;
+                        break;
+                    case 3:
+                        currentTypeface = Typeface.MONOSPACE;
+                        break;
+                }
+                chapterContent.setTypeface(currentTypeface);
+            }
+            @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         // Xử lý nút đóng
@@ -168,6 +223,8 @@ public class ChapterReaderActivity extends AppCompatActivity implements TextToSp
         Chapter chapter = chapterList.get(index);
         chapterTitle.setText(chapter.getTitle());
         chapterContent.setText(chapter.getContent());
+        chapterContent.setTextSize(currentFontSize); // Áp dụng cỡ chữ hiện tại
+        chapterContent.setTypeface(currentTypeface); // Áp dụng phông chữ hiện tại
     }
 
     @Override

@@ -5,9 +5,13 @@
     android:background="@drawable/hoagh1">
 
     <ImageView
-        android:id="@+id/logo" 
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" /> <!-- Thay logo bằng hình ảnh của bạn -->
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter"
+        android:maxWidth="200dp"
+        android:maxHeight="200dp"
+        android:adjustViewBounds="true" />
 
 </RelativeLayout>
