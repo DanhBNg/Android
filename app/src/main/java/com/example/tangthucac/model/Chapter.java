@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.example.tangthucac.activity.LoginActivity;
+import com.example.tangthucac.R;
+import com.example.tangthucac.activity.SignUpActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;

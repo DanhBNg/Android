@@ -1,9 +1,15 @@
-package com.example.tangthucac;
+package com.example.tangthucac.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.tangthucac.fragment.GenresFragment;
+import com.example.tangthucac.fragment.HomeFragment;
+import com.example.tangthucac.fragment.LibraryFragment;
+import com.example.tangthucac.fragment.UserFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

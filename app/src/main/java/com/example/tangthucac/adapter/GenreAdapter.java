@@ -1,4 +1,4 @@
-package com.example.tangthucac;
+package com.example.tangthucac.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tangthucac.activity.GenreStoriesActivity;
+import com.example.tangthucac.R;
+
 import java.util.List;
 
 public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHolder> {
