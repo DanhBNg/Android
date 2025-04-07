@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import com.example.tangthucac.R;
 import com.example.tangthucac.activity.StoryDetailActivity;
 import com.example.tangthucac.model.Library;
 import com.example.tangthucac.model.Story;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,6 +79,50 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
                         }
                     });
         });
+        holder.deleteIcon.setOnClickListener(v -> {
+            showDeleteConfirmationDialog(position, savedStory.getTitle());
+        });
+    }
+    private void showDeleteConfirmationDialog(int position, String storyTitle) {
+        new AlertDialog.Builder(context)
+                .setTitle("Xác nhận xóa")
+                .setMessage("Bạn có chắc muốn xóa truyện này khỏi thư viện?")
+                .setPositiveButton("Xóa", (dialog, which) -> {
+                    deleteStoryFromLibrary(position, storyTitle);
+                })
+                .setNegativeButton("Hủy", null)
+                .show();
+    }
+
+    private void deleteStoryFromLibrary(int position, String storyTitle) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference libraryRef = FirebaseDatabase.getInstance().getReference()
+                .child("Users")
+                .child(userId)
+                .child("Library");
+
+        // Tìm đúng node cần xóa bằng cách so sánh title
+        libraryRef.orderByChild("title").equalTo(storyTitle)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                            itemSnapshot.getRef().removeValue()
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Không xóa ngay từ list mà để Firebase listener tự cập nhật
+                                        Toast.makeText(context, "Đã xóa truyện khỏi thư viện", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(context, "Lỗi khi xóa: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(context, "Lỗi truy vấn: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -86,13 +132,14 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
 
     public static class LibraryViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvAuthor;
-        ImageView ivImage;
+        ImageView ivImage, deleteIcon;
 
         public LibraryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitleLib);
             tvAuthor = itemView.findViewById(R.id.tvAuthorLib);
             ivImage = itemView.findViewById(R.id.imgLib);
+            deleteIcon = itemView.findViewById(R.id.deleteIcon);
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.tangthucac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tangthucac.R;
+import com.example.tangthucac.activity.MainActivity;
+import com.example.tangthucac.activity.SearchActivity;
 import com.example.tangthucac.adapter.BannerAdapter;
 import com.example.tangthucac.adapter.StoryAdapter;
 import com.example.tangthucac.model.Story;
@@ -34,6 +38,7 @@ public class HomeFragment extends Fragment {
     private List<Integer> bannerImages;
     private Handler bannerHandler;
     private Runnable bannerRunnable;
+    private EditText ptSearch;
 
     private RecyclerView recyclerViewStories;
     private StoryAdapter storyAdapter;
@@ -49,6 +54,8 @@ public class HomeFragment extends Fragment {
 
         // Khởi tạo Firebase DatabaseReference
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        ptSearch = view.findViewById(R.id.ptSearch);
 
         // Cấu hình ViewPager2 cho banner quảng cáo (giữ nguyên)
         viewPagerBanner = view.findViewById(R.id.viewPagerBanner);
@@ -81,6 +88,12 @@ public class HomeFragment extends Fragment {
 
         // Thay thế Retrofit bằng Firebase Realtime Database
         fetchStoriesFromFirebase();
+
+        ptSearch.setOnClickListener(v -> {
+            // Tạo Intent để chuyển sang SearchActivity
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        });
 
         return view;
     }
