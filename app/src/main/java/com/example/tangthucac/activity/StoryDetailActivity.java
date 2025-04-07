@@ -149,9 +149,12 @@ public class StoryDetailActivity extends AppCompatActivity {
                     savedStory.put("image", story.getImage());
 
                     ref.setValue(savedStory)
-                            .addOnSuccessListener(unused -> Toast.makeText(StoryDetailActivity.this, "Đã lưu vào thư viện", Toast.LENGTH_SHORT).show())
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(StoryDetailActivity.this, "Đã lưu vào thư viện", Toast.LENGTH_SHORT).show();
+                                // Chỉ gọi requestRefresh sau khi lưu thành công
+                                sharedViewModel.requestRefresh();
+                            })
                             .addOnFailureListener(e -> Toast.makeText(StoryDetailActivity.this, "Lỗi khi lưu: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                            //sharedViewModel.requestRefresh();
                 }
             }
 

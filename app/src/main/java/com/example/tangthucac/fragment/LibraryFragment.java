@@ -32,7 +32,7 @@ public class LibraryFragment extends Fragment {
     private LibraryAdapter adapter;
     private List<Library> libraryItems;
     private SharedViewModel sharedViewModel;
-
+    private ValueEventListener valueEventListener;
     private DatabaseReference databaseReference;
 
     public LibraryFragment() {}
@@ -49,16 +49,16 @@ public class LibraryFragment extends Fragment {
         libraryItems = new ArrayList<>();
         adapter = new LibraryAdapter(getContext(), libraryItems);
         rcvLib.setAdapter(adapter);
-//        // refresh ui
-//        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-//
-//        // Lắng nghe sự kiện refresh
-//        sharedViewModel.getShouldRefresh().observe(getViewLifecycleOwner(), shouldRefresh -> {
-//            if (shouldRefresh != null && shouldRefresh) {
-//                loadLibrary(); // Tải lại dữ liệu
-//                sharedViewModel.refreshComplete(); // Đánh dấu hoàn thành
-//            }
-//        });
+        // refresh ui
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        // Lắng nghe sự kiện refresh
+        sharedViewModel.getShouldRefresh().observe(getViewLifecycleOwner(), shouldRefresh -> {
+            if (shouldRefresh != null && shouldRefresh) {
+                loadLibrary(); // Tải lại dữ liệu
+                sharedViewModel.refreshComplete(); // Đánh dấu hoàn thành
+            }
+        });
 
         // Load dữ liệu từ Firebase
         loadLibrary();
@@ -72,7 +72,12 @@ public class LibraryFragment extends Fragment {
                 .child(userId)
                 .child("Library");
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Hủy listener cũ nếu có
+        if (valueEventListener != null) {
+            databaseReference.removeEventListener(valueEventListener);
+        }
+
+        valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 libraryItems.clear();
@@ -82,13 +87,23 @@ public class LibraryFragment extends Fragment {
                         libraryItems.add(item);
                     }
                 }
-                adapter.notifyDataSetChanged(); // Cập nhật RecyclerView
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Có thể hiển thị Toast hoặc log lỗi nếu cần
+                // Xử lý lỗi nếu cần
             }
-        });
+        };
+
+        databaseReference.addValueEventListener(valueEventListener);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (databaseReference != null && valueEventListener != null) {
+            databaseReference.removeEventListener(valueEventListener);
+        }
     }
 }
