@@ -68,6 +68,19 @@ public class LibraryFragment extends Fragment {
     }
 
     private void loadLibrary() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(getContext(), "Bạn chưa đăng nhập!", Toast.LENGTH_SHORT).show();
+
+            // Ẩn RecyclerView, hiện TextView
+            rcvLib.setVisibility(View.GONE);
+
+            // Xóa dữ liệu cũ nếu có
+            libraryItems.clear();
+            adapter.notifyDataSetChanged();
+            return;
+        }
+
+        rcvLib.setVisibility(View.VISIBLE);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId)

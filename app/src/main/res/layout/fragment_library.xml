@@ -42,5 +42,6 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:layout_marginTop="15dp"
+        android:visibility="visible"
         android:scrollbars="vertical"/>
 </LinearLayout>
