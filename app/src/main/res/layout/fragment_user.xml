@@ -5,7 +5,8 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@android:color/white">
 
     <Button
         android:id="@+id/btn_Logout"
@@ -28,7 +29,8 @@
         app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/_28b79d3928a04bc32fdb8ac9898ee92" />
+        tools:srcCompat="@drawable/_28b79d3928a04bc32fdb8ac9898ee92"
+        android:background="@android:color/white"/>
 
     <TextView
         android:id="@+id/textView4"
@@ -39,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/white"/>
 
     <TextView
         android:id="@+id/txtUserId"
@@ -50,7 +53,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:background="@android:color/white"/>
 
     <TextView
         android:id="@+id/txtUserEmail"
@@ -61,7 +65,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/txtUserId" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUserId"
+        android:background="@android:color/white"/>
 
     <Button
         android:id="@+id/btn_log"
@@ -71,7 +76,8 @@
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        />
 
     <Button
         android:id="@+id/btn_sign"
