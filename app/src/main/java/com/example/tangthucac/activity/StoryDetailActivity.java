@@ -126,11 +126,18 @@ public class StoryDetailActivity extends AppCompatActivity {
         return "0";
     }
     private void saveStoryToLibrary() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        if (userId == null || story == null) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser == null) {
+            Toast.makeText(this, "Bạn cần đăng nhập để lưu truyện", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (story == null) {
             Toast.makeText(this, "Không thể lưu truyện", Toast.LENGTH_SHORT).show();
             return;
         }
+        String userId = currentUser.getUid();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId)
