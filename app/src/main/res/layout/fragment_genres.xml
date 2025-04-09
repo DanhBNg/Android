@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <!-- TextView "Thể Loại" căn giữa màn hình -->
     <TextView
@@ -20,7 +20,8 @@
     android:paddingBottom="15dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+        android:background="?android:attr/colorBackground"/>
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -28,10 +29,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="4dp"
-        android:background="@android:color/white"
+        android:background="?android:attr/colorBackground"
         app:layout_constraintTop_toBottomOf="@id/textView7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

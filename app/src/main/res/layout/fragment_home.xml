@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="?android:attr/colorBackground"
     tools:context=".fragment.HomeFragment">
 
     <!-- Thanh cuộn chung -->
@@ -13,21 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:background="@android:color/white">
+        android:background="?android:attr/colorBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp"
-            android:background="@android:color/white">
+            android:background="?android:attr/colorBackground">
 
             <!-- Các thành phần khác giữ nguyên -->
             <LinearLayout
                 android:layout_width="393dp"
                 android:layout_height="61dp"
                 android:orientation="horizontal"
-                android:background="@android:color/white">
+                android:background="?android:attr/colorBackground">
 
                 <ImageView
                     android:id="@+id/imageView5"

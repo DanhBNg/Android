@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="?android:attr/colorBackground"
+        >
 
         <ImageView
             android:id="@+id/ivHotCover"
@@ -27,9 +29,10 @@
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/black"
+
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="?android:attr/colorBackground"/>
 
         <TextView
             android:id="@+id/tvHotAuthor"
@@ -37,14 +40,14 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-
+            android:background="?android:attr/colorBackground"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tvHotViews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:background="?android:attr/colorBackground"
             android:textSize="12sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

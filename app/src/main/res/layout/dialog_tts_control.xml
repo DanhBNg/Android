@@ -12,27 +12,31 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/colorBackground"/>
 
     <!-- Điều chỉnh tốc độ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        android:background="?android:attr/colorBackground">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tốc độ:"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:background="?android:attr/colorBackground"/>
         <SeekBar
             android:id="@+id/seekBarSpeed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:max="200"
-            android:progress="100"/>
+            android:progress="100"
+            android:background="?android:attr/colorBackground"/>
     </LinearLayout>
 
     <!-- Điều chỉnh cao độ -->
@@ -40,20 +44,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        android:background="?android:attr/colorBackground">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cao độ:"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:background="?android:attr/colorBackground"/>
         <SeekBar
             android:id="@+id/seekBarPitch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:max="200"
-            android:progress="100"/>
+            android:progress="100"
+            android:background="?android:attr/colorBackground"/>
     </LinearLayout>
 
     <!-- Điều chỉnh cỡ chữ -->
@@ -61,20 +68,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        android:background="?android:attr/colorBackground">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cỡ chữ:"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:background="?android:attr/colorBackground"/>
         <SeekBar
             android:id="@+id/seekBarFontSize"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:max="30"
-            android:progress="18"/>
+            android:progress="18"
+            android:background="?android:attr/colorBackground"/>
     </LinearLayout>
 
     <!-- Chọn phông chữ -->
@@ -82,18 +92,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/colorBackground">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Phông chữ:"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:background="?android:attr/colorBackground"/>
         <Spinner
             android:id="@+id/spinnerFont"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"/>
+            android:layout_weight="3"
+            />
     </LinearLayout>
 
     <Button
@@ -102,5 +115,6 @@
         android:layout_height="wrap_content"
         android:text="Đóng"
         android:backgroundTint="#2196F3"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+      />
 </LinearLayout>

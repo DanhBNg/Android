@@ -69,6 +69,7 @@ dependencies {
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1") // Hoặc phiên bản mới hơn
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation ("com.google.android.material:material:1.4.0")
 
 
 

@@ -1,14 +1,19 @@
 package com.example.tangthucac.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.example.tangthucac.activity.LoginActivity;
 import com.example.tangthucac.R;
@@ -29,6 +34,11 @@ public class UserFragment extends Fragment {
     private FirebaseAuth mAuth;
     private GoogleSignInClient ggS;
     private DatabaseReference databaseReference;
+    private SwitchCompat darkModeSwitch;
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "MyPrefs";
+    private static final String DARK_MODE_KEY = "darkMode";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +50,35 @@ public class UserFragment extends Fragment {
         btn_sign = view.findViewById(R.id.btn_sign);
         txtUserId = view.findViewById(R.id.txtUserId);
         txtUserEmail = view.findViewById(R.id.txtUserEmail);
+        darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
+
+        // Initialize SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        // Set initial state of dark mode switch
+        boolean isDarkMode = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
+        darkModeSwitch.setChecked(isDarkMode);
+
+        // Set up dark mode switch listener
+        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Save preference
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean(DARK_MODE_KEY, isChecked);
+                editor.apply();
+
+                // Apply dark mode
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+
+                // Restart activity to apply theme changes
+                requireActivity().recreate();
+            }
+        });
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -100,6 +139,7 @@ public class UserFragment extends Fragment {
         });
         return view;
     }
+
     private void signOut() {
         // Đăng xuất Firebase
         mAuth.signOut();
@@ -113,6 +153,7 @@ public class UserFragment extends Fragment {
             requireActivity().finish(); // Đóng Activity hiện tại
         });
     }
+
     private String generateRandomId() {
         int length = 10; // Độ dài chuỗi
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

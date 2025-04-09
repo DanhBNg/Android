@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="?android:attr/colorBackground">
 
     <ImageView
         android:id="@+id/storyImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:background="@android:color/white"/>
+        android:background="?android:attr/colorBackground"/>
 
     <TextView
         android:id="@+id/storyTitle"
@@ -21,21 +21,21 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:paddingTop="10dp"
-        android:background="@android:color/white"/>
+        android:background="?android:attr/colorBackground"/>
 
     <TextView
         android:id="@+id/storyAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:background="@android:color/white"/>
+        android:background="?android:attr/colorBackground"/>
 
     <TextView
         android:id="@+id/storyViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:background="@android:color/white"/>
+        android:background="?android:attr/colorBackground"/>
 
     <Button
         android:id="@+id/btn_save_story"
@@ -58,5 +58,5 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="20dp"
-        android:background="@android:color/white"/>
+        android:background="?android:attr/colorBackground"/>
 </LinearLayout>
