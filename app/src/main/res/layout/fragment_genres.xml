@@ -15,12 +15,12 @@
         android:layout_height="wrap_content"
         android:text="Thể Loại"
         android:textSize="25sp"
-    android:textStyle="bold"
-    android:paddingTop="5dp"
-    android:paddingBottom="15dp"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="?android:attr/colorBackground"/>
 
     <!-- RecyclerView -->

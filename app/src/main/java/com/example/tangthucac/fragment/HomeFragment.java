@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +41,7 @@ public class HomeFragment extends Fragment {
     private List<Integer> bannerImages;
     private Handler bannerHandler;
     private Runnable bannerRunnable;
-    private EditText ptSearch;
+    private TextView fakeSearch;
 
     private RecyclerView recyclerHotStories;
     private HotStoryAdapter hotStoryAdapter;
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
         // Khởi tạo Firebase DatabaseReference
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        ptSearch = view.findViewById(R.id.ptSearch);
+        fakeSearch = view.findViewById(R.id.fakeSearch);
 
         // Cấu hình ViewPager2 cho banner quảng cáo (giữ nguyên)
         viewPagerBanner = view.findViewById(R.id.viewPagerBanner);
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
         hotStoryAdapter = new HotStoryAdapter(getContext(), hotStoryList);
         recyclerHotStories.setAdapter(hotStoryAdapter);
 
-        ptSearch.setOnClickListener(v -> {
+        fakeSearch.setOnClickListener(v -> {
             // Tạo Intent để chuyển sang SearchActivity
             Intent intent = new Intent(getActivity(), SearchActivity.class);
             startActivity(intent);

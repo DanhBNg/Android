@@ -29,8 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Random;
 
 public class UserFragment extends Fragment {
-    private Button btnLogout, btn_log, btn_sign;
-    private TextView txtUserId, txtUserEmail;
+    private TextView txtUserEmail, txtUserId, fakebtnLogin, fakebtnSignup, fakebtnLogout;
     private FirebaseAuth mAuth;
     private GoogleSignInClient ggS;
     private DatabaseReference databaseReference;
@@ -45,11 +44,11 @@ public class UserFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        btnLogout = view.findViewById(R.id.btn_Logout);
-        btn_log = view.findViewById(R.id.btn_log);
-        btn_sign = view.findViewById(R.id.btn_sign);
+        fakebtnLogin = view.findViewById(R.id.fakebtnLogin);
+        fakebtnSignup = view.findViewById(R.id.fakebtnSignup);
+        fakebtnLogout = view.findViewById(R.id.fakebtnLogout);
+        txtUserEmail = view.findViewById(R.id.txtUseremail);
         txtUserId = view.findViewById(R.id.txtUserId);
-        txtUserEmail = view.findViewById(R.id.txtUserEmail);
         darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
 
         // Initialize SharedPreferences
@@ -85,6 +84,7 @@ public class UserFragment extends Fragment {
             // Người dùng đã đăng nhập
             txtUserEmail.setText("Email: " + currentUser.getEmail());
 
+
             // Lấy tham chiếu Database
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
 
@@ -102,11 +102,11 @@ public class UserFragment extends Fragment {
             });
 
             // Ẩn nút Login & Sign Up
-            btn_log.setVisibility(View.GONE);
-            btn_sign.setVisibility(View.GONE);
+            fakebtnLogin.setVisibility(View.GONE);
+            fakebtnSignup.setVisibility(View.GONE);
         } else {
             // Người dùng chưa đăng nhập, ẩn Logout
-            btnLogout.setVisibility(View.GONE);
+            fakebtnLogout.setVisibility(View.GONE);
             txtUserId.setText("ID: ");
             txtUserEmail.setText("Email: ");
         }
@@ -118,20 +118,20 @@ public class UserFragment extends Fragment {
                 .build();
         ggS = GoogleSignIn.getClient(requireActivity(), gso);
 
-        btn_log.setOnClickListener(new View.OnClickListener() {
+        fakebtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
-        btn_sign.setOnClickListener(new View.OnClickListener() {
+        fakebtnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity((new Intent(getActivity(), SignUpActivity.class)));
             }
         });
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        fakebtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();

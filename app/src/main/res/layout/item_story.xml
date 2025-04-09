@@ -51,6 +51,7 @@
             android:gravity="center"
             android:text="Tác giả"
             android:textColor="#555"
+            android:ellipsize="end"
             android:textSize="14sp"
             android:maxLength="22"
             android:background="?android:attr/colorBackground"/>
