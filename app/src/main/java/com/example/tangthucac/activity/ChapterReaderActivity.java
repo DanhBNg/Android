@@ -240,7 +240,7 @@ public class ChapterReaderActivity extends AppCompatActivity implements TextToSp
                 Toast.makeText(this, "Ngôn ngữ không được hỗ trợ", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "Khởi tạo TextToSpeech thất bại", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cần cấp quyền để nghe", Toast.LENGTH_SHORT).show();
         }
     }
 

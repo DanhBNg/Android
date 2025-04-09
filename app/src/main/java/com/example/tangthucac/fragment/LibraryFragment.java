@@ -69,8 +69,6 @@ public class LibraryFragment extends Fragment {
 
     private void loadLibrary() {
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            Toast.makeText(getContext(), "Bạn chưa đăng nhập!", Toast.LENGTH_SHORT).show();
-
             // Ẩn RecyclerView, hiện TextView
             rcvLib.setVisibility(View.GONE);
 
