@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,6 +21,7 @@ import com.example.tangthucac.R;
 import com.example.tangthucac.activity.MainActivity;
 import com.example.tangthucac.activity.SearchActivity;
 import com.example.tangthucac.adapter.BannerAdapter;
+import com.example.tangthucac.adapter.HotStoryAdapter;
 import com.example.tangthucac.adapter.StoryAdapter;
 import com.example.tangthucac.model.Story;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,10 @@ public class HomeFragment extends Fragment {
     private Handler bannerHandler;
     private Runnable bannerRunnable;
     private EditText ptSearch;
+
+    private RecyclerView recyclerHotStories;
+    private HotStoryAdapter hotStoryAdapter;
+    private List<Story> hotStoryList = new ArrayList<>();
 
     private RecyclerView recyclerViewStories;
     private StoryAdapter storyAdapter;
@@ -86,8 +92,15 @@ public class HomeFragment extends Fragment {
         storyAdapter = new StoryAdapter(getContext(), storyList);
         recyclerViewStories.setAdapter(storyAdapter);
 
-        // Thay thế Retrofit bằng Firebase Realtime Database
+
         fetchStoriesFromFirebase();
+
+        recyclerHotStories = view.findViewById(R.id.recyclerHotStories);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerHotStories.setLayoutManager(gridLayoutManager);
+
+        hotStoryAdapter = new HotStoryAdapter(getContext(), hotStoryList);
+        recyclerHotStories.setAdapter(hotStoryAdapter);
 
         ptSearch.setOnClickListener(v -> {
             // Tạo Intent để chuyển sang SearchActivity
@@ -107,9 +120,15 @@ public class HomeFragment extends Fragment {
                     Story story = dataSnapshot.getValue(Story.class);
                     if (story != null) {
                         storyList.add(story);
+                       //
+                    if (story.isHot() && hotStoryList.size()<=8 ) {
+                            hotStoryList.add(story);
+                        }
                     }
                 }
                 storyAdapter.notifyDataSetChanged();
+                hotStoryAdapter.notifyDataSetChanged();
+
             }
 
             @Override

@@ -5,13 +5,15 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     app:cardElevation="4dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="?android:attr/colorBackground">
 
         <ImageView
             android:id="@+id/imgLib"
@@ -26,7 +28,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_marginStart="8dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?android:attr/colorBackground">
 
             <TextView
                 android:id="@+id/tvTitleLib"
@@ -36,7 +39,8 @@
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:maxLines="1"
-                android:ellipsize="end" />
+                android:ellipsize="end"
+                android:background="?android:attr/colorBackground"/>
 
             <TextView
                 android:id="@+id/tvAuthorLib"
@@ -45,7 +49,8 @@
                 android:maxLines="2"
                 android:text="Tác giả"
                 android:textColor="#666"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:background="?android:attr/colorBackground"/>
         </LinearLayout>
 
         <ImageView

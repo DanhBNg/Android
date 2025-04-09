@@ -10,12 +10,17 @@ public class Story implements Serializable {
     private int views;
     private String image;
     private Map<String, Chapter> chapters;
-    private String genre;  // Thêm trường genre
+    private String genre;
+    private boolean hot; // Thêm trường hot
 
-    public Story() {}  // Firebase yêu cầu constructor rỗng
+    public Story() {}
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() { return title; }
@@ -23,8 +28,8 @@ public class Story implements Serializable {
     public int getViews() { return views; }
     public String getImage() { return image; }
     public Map<String, Chapter> getChapters() { return chapters; }
-    public String getGenre() { return genre; }  // Getter cho genre
+    public String getGenre() { return genre; }
+    public boolean isHot() { return hot; }
 
-    public void setId(String key) {
-    }
+
 }

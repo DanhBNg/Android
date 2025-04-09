@@ -6,13 +6,17 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:background="?android:attr/colorBackground"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="?android:attr/colorBackground"
+        >
 
         <ImageView
             android:id="@+id/imageStory"
@@ -34,9 +38,10 @@
             android:maxLines="1"
             android:paddingTop="4dp"
             android:text="Tên truyện"
-            android:textColor="#000"
+
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="?android:attr/colorBackground"/>
 
 
         <TextView
@@ -47,6 +52,7 @@
             android:text="Tác giả"
             android:textColor="#555"
             android:textSize="14sp"
-            android:maxLength="22"/>
+            android:maxLength="22"
+            android:background="?android:attr/colorBackground"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -5,26 +5,30 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="?android:attr/colorBackground">
 
         <ImageView
             android:id="@+id/ivGenreStoryImage"
             android:layout_width="80dp"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_menu_gallery" />
+            android:src="@android:drawable/ic_menu_gallery"
+            android:background="?android:attr/colorBackground"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="12dp">
+            android:paddingStart="12dp"
+            android:background="?android:attr/colorBackground">
 
             <TextView
                 android:id="@+id/tvGenreStoryTitle"
@@ -32,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:text="Tên truyện"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="?android:attr/colorBackground"/>
 
             <TextView
                 android:id="@+id/tvGenreStoryAuthor"
@@ -41,7 +46,8 @@
                 android:layout_marginTop="4dp"
                 android:text="Tác giả: Tác giả"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:background="?android:attr/colorBackground"/>
 
             <TextView
                 android:id="@+id/tvGenreStoryViews"
@@ -50,7 +56,8 @@
                 android:layout_marginTop="4dp"
                 android:text="Lượt xem: 0"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:background="?android:attr/colorBackground"/>
 
         </LinearLayout>
     </LinearLayout>
