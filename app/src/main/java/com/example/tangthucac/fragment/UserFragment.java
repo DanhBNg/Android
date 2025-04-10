@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import androidx.appcompat.widget.SwitchCompat;
 
+import com.example.tangthucac.activity.ChatActivity;
 import com.example.tangthucac.activity.LoginActivity;
 import com.example.tangthucac.R;
 import com.example.tangthucac.activity.SignUpActivity;
@@ -35,6 +36,8 @@ public class UserFragment extends Fragment {
     private DatabaseReference databaseReference;
     private SwitchCompat darkModeSwitch;
     private SharedPreferences sharedPreferences;
+
+    private Button button;
     private static final String PREFS_NAME = "MyPrefs";
     private static final String DARK_MODE_KEY = "darkMode";
 
@@ -50,6 +53,7 @@ public class UserFragment extends Fragment {
         txtUserEmail = view.findViewById(R.id.txtUseremail);
         txtUserId = view.findViewById(R.id.txtUserId);
         darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
+        button = view.findViewById(R.id.button);
 
         // Initialize SharedPreferences
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -58,6 +62,13 @@ public class UserFragment extends Fragment {
         boolean isDarkMode = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
         darkModeSwitch.setChecked(isDarkMode);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                startActivity(intent);
+            }
+        });
         // Set up dark mode switch listener
         darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -138,6 +149,7 @@ public class UserFragment extends Fragment {
             }
         });
         return view;
+
     }
 
     private void signOut() {
