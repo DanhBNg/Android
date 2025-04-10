@@ -6,6 +6,11 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.util.Log;
+import okhttp3.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class OpenAIHelper {
     private static final String TAG = "GeminiAPI";
     private static final String API_KEY = "AIzaSyC3YdOPnUA1SFjgK_iuB3t79DvaNq5U3Go";
@@ -38,39 +43,12 @@ public class OpenAIHelper {
         }
     }
 
-    public static void sendQuestionWithContext(String message, String storyTitle, String chapterContent, Callback callback) {
-        OkHttpClient client = new OkHttpClient();
-        JSONObject json = new JSONObject();
-
-        try {
-            JSONObject part = new JSONObject();
-            part.put("text", "Dưới đây là chương đầu của truyện '" + storyTitle + "':\n" + chapterContent + "\n\n" + message);
-
-            JSONObject content = new JSONObject();
-            content.put("parts", new JSONArray().put(part));
-
-            json.put("contents", new JSONArray().put(content));
-
-            RequestBody body = RequestBody.create(json.toString(), MediaType.parse("application/json"));
-            Request request = new Request.Builder()
-                    .url(API_URL + "?key=" + API_KEY)
-                    .post(body)
-                    .build();
-
-            Log.d(TAG, "Request with context: " + json.toString());
-
-            client.newCall(request).enqueue(callback);
-        } catch (Exception e) {
-            Log.e(TAG, "Lỗi khi gửi yêu cầu với ngữ cảnh", e);
-        }
-    }
 
     public static String parseGeminiResponse(String jsonResponse) {
         try {
             Log.d(TAG, "Raw response: " + jsonResponse);
             JSONObject obj = new JSONObject(jsonResponse);
 
-            // Kiểm tra lỗi từ API
             if (obj.has("error")) {
                 JSONObject err = obj.getJSONObject("error");
                 return "Lỗi từ Gemini: " + err.getString("message");

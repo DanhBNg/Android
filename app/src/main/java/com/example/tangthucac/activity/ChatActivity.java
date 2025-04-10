@@ -54,9 +54,7 @@ public class ChatActivity extends AppCompatActivity {
                         try {
                             String answer = OpenAIHelper.parseGeminiResponse(response.body().string());
                             runOnUiThread(() -> addMessage(new Message(answer, "bot")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        } catch (Exception e) { e.printStackTrace(); }
                     }
 
                     @Override
@@ -67,7 +65,6 @@ public class ChatActivity extends AppCompatActivity {
                 edtMessage.setText("");
             }
         });
-
     }
 
     private void addMessage(Message msg) {
