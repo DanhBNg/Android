@@ -78,6 +78,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_log"
         android:text="Đăng ký"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/txtPassdkre"
         app:layout_constraintStart_toStartOf="@+id/txtPassdkre"
         app:layout_constraintTop_toBottomOf="@+id/txtPassdkre" />
