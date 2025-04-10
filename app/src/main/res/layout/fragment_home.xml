@@ -46,8 +46,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="393dp"
-                android:layout_height="61dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:background="?android:attr/colorBackground"
 
                 android:orientation="horizontal">
@@ -59,6 +59,7 @@
                     android:layout_margin="6dp"
                     android:background="@drawable/chat_bot"
                     android:clickable="true"
+                    android:drawableEnd="@android:drawable/ic_menu_search"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:hint="Tìm kiếm"
