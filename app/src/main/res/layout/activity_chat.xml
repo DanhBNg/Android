@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/textView5"
@@ -11,9 +12,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
         android:paddingTop="5dp"
-        android:text="AI chat"
+        android:text="Chatbot Hỗ trợ"
         android:gravity="center"
-        android:textSize="25dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,30 +23,34 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="8dp"
-        />
+        android:background="#F5F5F5"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_text_background"
+        android:padding="4dp">
 
         <EditText
             android:id="@+id/edtMessage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/chat_bot"
             android:hint="Nhập câu hỏi..."
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:paddingLeft="5dp" />
+            android:background="@null"
+            android:padding="12dp"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:text="Gửi" />
+            android:layout_height="wrap_content"
+            android:text="Gửi"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#2196F3"
+            android:textAllCaps="false"
+            android:padding="12dp"/>
     </LinearLayout>
 </LinearLayout>
