@@ -106,6 +106,7 @@ public class SearchActivity extends AppCompatActivity {
                                 results.add(story);
                             }
                         }
+                        if (results.isEmpty()) showToast("Không tìm thấy truyện");
                         resultAdapter.updateData(results);
                     }
 
