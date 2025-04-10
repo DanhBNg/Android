@@ -4,28 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="AI chat"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:padding="8dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/edtMessage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="Nhập câu hỏi..." />
+            android:background="@drawable/chat_bot"
+            android:hint="Nhập câu hỏi..."
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="5dp" />
 
         <Button
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
             android:text="Gửi" />
     </LinearLayout>
 </LinearLayout>

@@ -30,14 +30,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Random;
 
 public class UserFragment extends Fragment {
-    private TextView txtUserEmail, txtUserId, fakebtnLogin, fakebtnSignup, fakebtnLogout;
+    private TextView txtUserEmail, txtUserId, fakebtnLogin, fakebtnSignup, fakebtnLogout, fakebtnAi;
     private FirebaseAuth mAuth;
     private GoogleSignInClient ggS;
     private DatabaseReference databaseReference;
     private SwitchCompat darkModeSwitch;
     private SharedPreferences sharedPreferences;
 
-    private Button button;
     private static final String PREFS_NAME = "MyPrefs";
     private static final String DARK_MODE_KEY = "darkMode";
 
@@ -53,7 +52,7 @@ public class UserFragment extends Fragment {
         txtUserEmail = view.findViewById(R.id.txtUseremail);
         txtUserId = view.findViewById(R.id.txtUserId);
         darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
-        button = view.findViewById(R.id.button);
+        fakebtnAi = view.findViewById(R.id.fakebtnAi);
 
         // Initialize SharedPreferences
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -62,7 +61,7 @@ public class UserFragment extends Fragment {
         boolean isDarkMode = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
         darkModeSwitch.setChecked(isDarkMode);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        fakebtnAi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);

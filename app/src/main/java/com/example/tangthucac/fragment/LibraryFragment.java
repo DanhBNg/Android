@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.tangthucac.R;
@@ -35,6 +36,7 @@ public class LibraryFragment extends Fragment {
     private SharedViewModel sharedViewModel;
     private ValueEventListener valueEventListener;
     private DatabaseReference databaseReference;
+    private LinearLayout layoutNoLogin;
 
     public LibraryFragment() {}
     @Nullable
@@ -42,6 +44,7 @@ public class LibraryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
 
+        layoutNoLogin = view.findViewById(R.id.layoutNoLogin);
         // Ánh xạ RecyclerView
         rcvLib = view.findViewById(R.id.rcvLib);
         rcvLib.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,6 +74,7 @@ public class LibraryFragment extends Fragment {
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Ẩn RecyclerView, hiện TextView
             rcvLib.setVisibility(View.GONE);
+            layoutNoLogin.setVisibility(View.VISIBLE);
 
             // Xóa dữ liệu cũ nếu có
             libraryItems.clear();
@@ -79,6 +83,7 @@ public class LibraryFragment extends Fragment {
         }
 
         rcvLib.setVisibility(View.VISIBLE);
+        layoutNoLogin.setVisibility(View.GONE);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId)
