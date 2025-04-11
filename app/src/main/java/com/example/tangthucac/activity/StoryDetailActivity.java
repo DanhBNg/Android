@@ -93,7 +93,7 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            finish(); // Close activity if there's an error
+            finish();
         }
     }
 
