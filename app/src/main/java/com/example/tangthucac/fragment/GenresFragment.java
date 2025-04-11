@@ -31,7 +31,7 @@ public class GenresFragment extends Fragment {
         recyclerViewGenres = view.findViewById(R.id.recyclerViewGenres);
         recyclerViewGenres.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 cột
 
-        // Danh sách các thể loại (dựa trên ảnh anh_theloai.jpg)
+        // Danh sách các thể loại
         genreList = Arrays.asList(
                 "Tiên Hiệp", "Kiếm Hiệp", "Ngôn Tình", "Đô Thị", "Quan Trường", "Võng Du",
                 "Khoa Huyễn", "Hệ Thống", "Huyền Huyễn", "Dị Giới", "Dị Năng", "Quân Sự",

@@ -43,8 +43,22 @@ public class UserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        //View view = inflater.inflate(R.layout.fragment_user, container, false);
 
+
+
+        // Initialize SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        // Áp dụng dark mode trước khi inflate layout
+        boolean isDarkMode = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
         mAuth = FirebaseAuth.getInstance();
         fakebtnLogin = view.findViewById(R.id.fakebtnLogin);
         fakebtnSignup = view.findViewById(R.id.fakebtnSignup);
@@ -53,12 +67,6 @@ public class UserFragment extends Fragment {
         txtUserId = view.findViewById(R.id.txtUserId);
         darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
         fakebtnAi = view.findViewById(R.id.fakebtnAi);
-
-        // Initialize SharedPreferences
-        sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-
-        // Set initial state of dark mode switch
-        boolean isDarkMode = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
         darkModeSwitch.setChecked(isDarkMode);
 
         fakebtnAi.setOnClickListener(new View.OnClickListener() {
