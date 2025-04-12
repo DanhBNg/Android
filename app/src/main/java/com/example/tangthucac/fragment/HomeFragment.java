@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
 
         // Khởi tạo Firebase DatabaseReference
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.keepSynced(true);
 
         fakeSearch = view.findViewById(R.id.fakeSearch);
 

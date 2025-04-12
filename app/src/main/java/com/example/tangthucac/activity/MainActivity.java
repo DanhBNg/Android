@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.tangthucac.R;
 import com.example.tangthucac.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Tiích hợp cache cua Firebase, chi goi 1 lan duy nhat
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         viewPager = findViewById(R.id.viewPager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
